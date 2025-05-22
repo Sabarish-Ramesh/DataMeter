@@ -6,7 +6,7 @@ public class UsageRecord {
     private int data4G;
     private int data5G;
     private boolean isRoaming;
-
+//constructor
     public UsageRecord(String mobileno, String towername, int data4G, int data5G, boolean isRoaming) {
         this.mobileno = mobileno;
         this.towername = towername;
