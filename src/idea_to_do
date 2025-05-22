@@ -21,5 +21,25 @@ step 2:
 
 step 3:
     create a file having various mobile numbers
+        using bufferedreader with filereader with IOException to catch the errors
+
+step 4:
+    NOW REAL TASK:create files based on month and need to display all in the below format
+
+            Mobile Number|4G|5G|4G Roaming|5G Roaming|Cost
+
+    Step 4.1:
+        *so 1st do it for "january" month
+
+        step 4.1.1:
+            *need to create a model     -models.UsageSummary
+                -In that pass UsageRecord models objects for a particular number
+                -so need some way to aggregate based on mobile numbers and with its record aggregation
+
+        step 4.1.2  -in app.java
+                -read a line from "january.java"
+                -parse the data using "Parsedata" it return a UsageRecord (object)
+                -get a mobilenumber(obj.getmobilenumber()) and pass a record(object) to UsageSummary
+                    -use hashmap <mobilenumber,UsageSummary<records>>
 
 
