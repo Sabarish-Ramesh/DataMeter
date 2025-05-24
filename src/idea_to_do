@@ -42,4 +42,11 @@ step 4:
                 -get a mobilenumber(obj.getmobilenumber()) and pass a record(object) to UsageSummary
                     -use hashmap <mobilenumber,UsageSummary<records>>
 
+Step5:
+    validated each part in a line
+
+Step6:
+    *Everything done for single file,
+    *now i need to handle multiple files,for that we need to loop file reading,so everything inside the try-catch of
+    app.java need to be looped
 
