@@ -68,7 +68,23 @@ public class App
                     }
                 }
 
-
+                System.out.println("Mobile Number|4G|5G|4G Roaming|5G Roaming|Cost");
+                //iterate the map and print the data
+                for (Map.Entry<String, UsageSummary> data : map.entrySet()) {
+                    //get mobile number
+                    String mobile = data.getKey();
+                    //get values for the related mobile number
+                    UsageSummary summary = data.getValue();
+                    double cost = CalculateCost.Calculate(summary);
+                    System.out.printf("%s   | %s | %s | %s | %s | %.0f\n",
+                            mobile,
+                            summary.getHome4g(),
+                            summary.getHome5g(),
+                            summary.getRoaming4g(),
+                            summary.getRoaming5g(),
+                            cost
+                    );
+                }
 
             }
             //if there is error while reading the  input throw this error
@@ -76,22 +92,6 @@ public class App
                 System.out.println(e.getMessage());
             }
         }
-        System.out.println("Mobile Number|4G|5G|4G Roaming|5G Roaming|Cost");
-        //iterate the map and print the data
-        for (Map.Entry<String, UsageSummary> data : map.entrySet()) {
-            //get mobile number
-            String mobile = data.getKey();
-            //get values for the related mobile number
-            UsageSummary summary = data.getValue();
-            double cost = CalculateCost.Calculate(summary);
-            System.out.printf("%s   | %s | %s | %s | %s | %.0f\n",
-                    mobile,
-                    summary.getHome4g(),
-                    summary.getHome5g(),
-                    summary.getRoaming4g(),
-                    summary.getRoaming5g(),
-                    cost
-            );
-        }
+
     }
 }
