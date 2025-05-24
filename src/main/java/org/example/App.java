@@ -20,18 +20,23 @@ import java.util.Map;
 public class App 
 {
     public static void main( String[] args ) {
-        //single input
+        //single input{
 //        String line = "9000600600|InAir1234|0|13456|No";
-//        String filePath = "src/main/data/january.txt";
+//        String filePath = "src/main/data/january.txt";}
+
+        //using File object for finding folder instead of file
         File Folder = new File("src/main/data");
+        //this list all the files inside that folder
         File[] files = Folder.listFiles((dir, name) -> name.endsWith(".txt"));
 
+        //check if folder having data files
         if (files == null || files.length == 0) {
             System.out.println("No data files found.");
             return;
         }
-        //creating map
+        //creating map to store the aggregate data with mobile number
         HashMap<String, UsageSummary> map = new HashMap<>();
+        //loop each file
         for (File file : files) {
             System.out.println("Processing file: " + file.getName());
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -68,29 +73,44 @@ public class App
                     }
                 }
 
-                System.out.println("Mobile Number|4G|5G|4G Roaming|5G Roaming|Cost");
-                //iterate the map and print the data
-                for (Map.Entry<String, UsageSummary> data : map.entrySet()) {
-                    //get mobile number
-                    String mobile = data.getKey();
-                    //get values for the related mobile number
-                    UsageSummary summary = data.getValue();
-                    double cost = CalculateCost.Calculate(summary);
-                    System.out.printf("%s   | %s | %s | %s | %s | %.0f\n",
-                            mobile,
-                            summary.getHome4g(),
-                            summary.getHome5g(),
-                            summary.getRoaming4g(),
-                            summary.getRoaming5g(),
-                            cost
-                    );
-                }
+
 
             }
             //if there is error while reading the  input throw this error
             catch (IOException e) {
                 System.out.println(e.getMessage());
             }
+        }
+        System.out.println("Mobile Number|4G|5G|4G Roaming|5G Roaming|Cost");
+        //apply the threshold value 10000KB
+        int threshold = 10000;
+        //iterate the map and print the data
+        for (Map.Entry<String, UsageSummary> data : map.entrySet()) {
+            //get mobile number
+            String mobile = data.getKey();
+            //get values for the related mobile number
+            UsageSummary summary = data.getValue();
+            //calculate the cost
+            double cost = CalculateCost.Calculate(summary);
+            //check if exceed the threshold
+            int TotalUsage = summary.getTotalUsage();
+            boolean isExceed = TotalUsage > threshold;
+            if (isExceed) {
+                //utilisation is beyond certain limit(threshold) so adding 5% extra
+                cost += cost * 0.05;
+            }
+            //if exceed the threshold print yes as last part else no
+            String exceeded = isExceed ? "YES" : "NO";
+            System.out.printf("%s   | %s | %s | %s | %s | %.0f | %s\n",
+                    mobile,
+                    summary.getHome4g(),
+                    summary.getHome5g(),
+                    summary.getRoaming4g(),
+                    summary.getRoaming5g(),
+                    cost,
+                    exceeded
+
+            );
         }
 
     }

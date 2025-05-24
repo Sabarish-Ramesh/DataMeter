@@ -50,3 +50,6 @@ Step6:
     *now i need to handle multiple files,for that we need to loop file reading,so everything inside the try-catch of
     app.java need to be looped
 
+Step 7:
+    Now add the treshold and add a january.txt to 100k rows
+

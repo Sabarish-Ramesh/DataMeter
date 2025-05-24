@@ -34,7 +34,7 @@ public class ParseData {
             throw new IllegalArgumentException("Invalid 4G or 5G data: must be a number");
         }
         //equalsIgnoreCase--it is more optimal
-//        boolean isRoaming = part[4].trim().equalsIgnoreCase("yes");
+//        boolean isRoaming = part[4].trim().equalsIgnoreCase("yes");-->this may accept anything else "yes"
 
         String roaming = part[4].trim().toLowerCase();
         boolean isRoaming;

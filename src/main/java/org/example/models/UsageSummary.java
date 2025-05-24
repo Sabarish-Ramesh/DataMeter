@@ -5,6 +5,7 @@ public class UsageSummary {
     private int home5g=0;
     private int roaming4g=0;
     private int roaming5g = 0;
+    //aggregate the values
     public void aggregate(UsageRecord record) {
         if(record.isRoaming()){
             roaming4g += record.getData4G();
@@ -35,5 +36,8 @@ public class UsageSummary {
     }
     public int total5G(){
         return home5g+roaming5g;
+    }
+    public int getTotalUsage() {
+        return total4G() + total5G(); // home + roaming
     }
 }
