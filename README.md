@@ -16,19 +16,19 @@ src/main/data/
 
 ## How to Run
 
-### Step 1: Clone the repository
+#### Step 1: Clone the repository
 ```bash
 git clone https://github.com/Sabarish-Ramesh/DataMeter.git
 cd DataMeter
 ```
 
-### Step 2: Compile Java files
+#### Step 2: Compile Java files
 #### For Windows/Linux/macOS:
 ```bash
 javac -d out src/main/java/org/example/*.java src/main/java/org/example/models/*.java src/main/java/org/example/parser/*.java src/main/java/org/example/calculate/*.java
 ```
 
-### Step 3: Run the application
+#### Step 3: Run the application
 ```bash
 java -cp out org.example.App
 ```
