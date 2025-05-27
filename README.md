@@ -66,3 +66,4 @@ Mobile Number|4G|5G|4G Roaming|5G Roaming|Cost
 - Automatically handles multiple input files
 - Applies 5% surcharge if usage exceeds 10,000 KB (default threshold)
 - Shows invalid input lines with clear error messages
+- **Junit tested** - src\test\java\org\example
