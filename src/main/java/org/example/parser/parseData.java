@@ -2,8 +2,8 @@ package org.example.parser;
 
 import org.example.models.UsageRecord;
 
-public class ParseData {
-    public static UsageRecord parserData(String line){
+public class parseData {
+    public static UsageRecord parseData(String line){
         //split the line using split()
         String[] part = line.split("\\|");
 //        System.out.println(part.length);

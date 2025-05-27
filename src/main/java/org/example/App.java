@@ -3,7 +3,7 @@ package org.example;
 import org.example.calculate.CalculateCost;
 import org.example.models.UsageRecord;
 import org.example.models.UsageSummary;
-import org.example.parser.ParseData;
+import org.example.parser.parseData;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -46,7 +46,7 @@ public class App
                 while ((line = reader.readLine()) != null) {
                     try {
                         //parsing the string using '|' ,it returns an object for a single input
-                        UsageRecord record = ParseData.parserData(line);
+                        UsageRecord record = parseData.parseData(line);
 
                         //get mobileno and aggregate it using UsageSummary
                         String mobileno = record.getMobileno();

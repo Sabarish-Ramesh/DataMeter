@@ -53,3 +53,72 @@ Step6:
 Step 7:
     Now add the treshold and add a january.txt to 100k rows
 
+Step 8:
+    now need to do unit test:
+    Step 8.1:
+        Learnings:
+            *what is j_unit test?
+                It helps you automate the testing of small pieces of code (like methods), so you can make sure your program
+            behaves correctly.-used by java developer
+            1.assertEquals(expected,actual)
+                use when method return a value,to check two values are qwual
+            2.boolean check
+                assertTrue(condition)->tc will pass if cond is true
+                assertFalse(condition)->tc will pass id cond is flase
+            3.assertThrow(Exception.class,()->{})
+                check block of code or methods throw any specified exception
+
+    Step 8.2
+        *now lets test so src/test/java/org/example/parser/parserTester
+            whatever i did to throw error in parsedata.java write testcase
+                check "src\test\java\org\example\parser\parserTester.java"
+
+    Step 8.3
+        * now need to do the same thing for useageSummary.java
+            1.do summary for home usage only
+            2.do summary for roaming usage only
+            3.do for both
+            4.do for total
+
+    Step 8.4
+        * Now I need to do the same for calculateCost.java (cost calculation logic)
+          → Start writing unit tests for CalculateCost.calculate(UsageSummary) method
+
+          Ideas I thought and tested:
+
+        Case 1: Only home
+
+          Input: 4G = 1000, 5G = 500 (non-roaming)
+
+          Expected Cost: 1000*0.01 + 500*0.02 = 10 + 10 = 20
+
+        Case 2: Only roaming
+
+          Input: 4G = 800, 5G = 1200 (roaming)
+
+          Expected Cost: 800*0.011 + 1200*0.023 = 8.8 + 27.6 = 36.4 → Rounded = 36
+
+        Case 3: Mixed
+
+          Home: 4G = 500, 5G = 1000
+
+          Roaming: 4G = 400, 5G = 500
+
+          Cost: 5 + 20 + 4.4 + 11.5 = 40.9 → Rounded = 41
+
+        Case 4: All zeros
+
+          All usage types = 0
+
+          Cost should be 0
+
+        Case 5: Large usage
+
+          Home: 4G = 5000, 5G = 10000
+
+          Roaming: 4G = 2000, 5G = 3000
+
+          Cost = 50 + 200 + 22 + 69 = 341
+
+
+
