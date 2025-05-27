@@ -120,5 +120,15 @@ Step 8:
 
           Cost = 50 + 200 + 22 + 69 = 341
 
+Step 9:
+    now write the output as file
+
+    step 9.1:learning:
+        *using "DateTimeFormatter" is a class in Java used for formatting and parsing date-time objects.
+        It enables developers to represent dates and times in various formats, both predefined and custom.
+
+        *using "LocalDateTime" 	Represents both a date and a time (yyyy-MM-dd-HH-mm-ss-ns)
+
+        *
 
 

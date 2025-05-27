@@ -5,10 +5,9 @@ import org.example.models.UsageRecord;
 import org.example.models.UsageSummary;
 import org.example.parser.parseData;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,37 +80,66 @@ public class App
                 System.out.println(e.getMessage());
             }
         }
-        System.out.println("Mobile Number|4G|5G|4G Roaming|5G Roaming|Cost");
-        //apply the threshold value 10000KB
-        int threshold = 10000;
-        //iterate the map and print the data
-        for (Map.Entry<String, UsageSummary> data : map.entrySet()) {
-            //get mobile number
-            String mobile = data.getKey();
-            //get values for the related mobile number
-            UsageSummary summary = data.getValue();
-            //calculate the cost
-            double cost = CalculateCost.Calculate(summary);
-            //check if exceed the threshold
-            int TotalUsage = summary.getTotalUsage();
-            boolean isExceed = TotalUsage > threshold;
-            if (isExceed) {
-                //utilisation is beyond certain limit(threshold) so adding 5% extra
-                cost += cost * 0.05;
+        //custom format of time
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH'hr'_mm'min'_ss'sec'");
+        //find the current time
+        String time = LocalDateTime.now().format(f);
+        System.out.println(time);
+        //find the folder and open it
+        File opdir = new File("src/main/output");
+        //if not exist create it
+        if(!opdir.exists())opdir.mkdirs();
+
+        String opFileName = "src/main/"+time+".txt";
+        try(BufferedWriter w = new BufferedWriter(new FileWriter(opFileName)))
+        {
+            System.out.println("Mobile Number|4G|5G|4G Roaming|5G Roaming|Cost");
+            //apply the threshold value 10000KB
+            int threshold = 10000;
+            //iterate the map and print the data
+            for (Map.Entry<String, UsageSummary> data : map.entrySet()) {
+                //get mobile number
+                String mobile = data.getKey();
+                //get values for the related mobile number
+                UsageSummary summary = data.getValue();
+                //calculate the cost
+                double cost = CalculateCost.Calculate(summary);
+                //check if exceed the threshold
+                int TotalUsage = summary.getTotalUsage();
+                boolean isExceed = TotalUsage > threshold;
+                if (isExceed) {
+                    //utilisation is beyond certain limit(threshold) so adding 5% extra
+                    cost += cost * 0.05;
+                }
+                //if exceed the threshold print yes as last part else no
+                String exceeded = isExceed ? "YES" : "NO";
+    //            System.out.printf("%s   | %s | %s | %s | %s | %.0f | %s\n",
+    //                    mobile,
+    //                    summary.getHome4g(),
+    //                    summary.getHome5g(),
+    //                    summary.getRoaming4g(),
+    //                    summary.getRoaming5g(),
+    //                    cost,
+    //                    exceeded
+    //
+    //            );
+                String line = String.format("%s | %s | %s | %s | %s | %.0f | %s\n",
+                        mobile,
+                        summary.getHome4g(),
+                        summary.getHome5g(),
+                        summary.getRoaming4g(),
+                        summary.getRoaming5g(),
+                        cost,
+                        exceeded
+                );
+                //printing in console
+                System.out.print(line);
+                //writing in file
+                w.write(line);
             }
-            //if exceed the threshold print yes as last part else no
-            String exceeded = isExceed ? "YES" : "NO";
-            System.out.printf("%s   | %s | %s | %s | %s | %.0f | %s\n",
-                    mobile,
-                    summary.getHome4g(),
-                    summary.getHome5g(),
-                    summary.getRoaming4g(),
-                    summary.getRoaming5g(),
-                    cost,
-                    exceeded
-
-            );
         }
-
+        catch (IOException e){
+            System.out.println("error while writting op file"+e.getMessage());
+        }
     }
 }

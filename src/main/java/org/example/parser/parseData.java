@@ -38,6 +38,7 @@ public class parseData {
 
         String roaming = part[4].trim().toLowerCase();
         boolean isRoaming;
+        //must be yes or no
         if (roaming.equals("yes")) {
             isRoaming = true;
         } else if (roaming.equals("no")) {
